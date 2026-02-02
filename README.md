@@ -43,3 +43,13 @@ This project demonstrates a complete end-to-end IoT solution that bridges the ph
 ### Others
 - **folder-project/**: A TypeScript project template structure.
 - **MapData/**: JSON data used for map applications.
+
+<img width="615" height="319" alt="image" src="https://github.com/user-attachments/assets/5b1216a9-36bf-4ad5-9622-798e58515af3" />
+⭡ ESP32-S3 Control Panel and Real-time Log Interface
+
+<img width="469" height="534" alt="image" src="https://github.com/user-attachments/assets/37efd53d-a376-46ee-a393-28ef63e4b999" />
+⭡ Integration of ESP32 IoT Prototype and Web Control Interface
+
+<img width="521" height="398" alt="image" src="https://github.com/user-attachments/assets/ba2eac32-f30e-44c7-894d-cf215177d58c" />
+⭡ ESP32-Based RFID Access Control System with Live Web Log
+
