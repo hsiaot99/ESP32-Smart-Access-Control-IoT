@@ -44,12 +44,21 @@ This project demonstrates a complete end-to-end IoT solution that bridges the ph
 - **folder-project/**: A TypeScript project template structure.
 - **MapData/**: JSON data used for map applications.
 
-<img width="615" height="319" alt="image" src="https://github.com/user-attachments/assets/5b1216a9-36bf-4ad5-9622-798e58515af3" />
-- ⭡ ESP32-S3 Control Panel and Real-time Log Interface
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5b1216a9-36bf-4ad5-9622-798e58515af3" alt="ESP32-S3 Control Panel" width="650">
+  <br>
+  <em>ESP32-S3 Control Panel and Real-time Log Interface</em>
+</p>
 
-<img width="469" height="534" alt="image" src="https://github.com/user-attachments/assets/37efd53d-a376-46ee-a393-28ef63e4b999" />
-- ⭡ Integration of ESP32 IoT Prototype and Web Control Interface
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/37efd53d-a376-46ee-a393-28ef63e4b999" alt="Integration of ESP32 IoT Prototype and Web Control Interface" width="500">
+  <br>
+  <em>Integration of ESP32 IoT Prototype and Web Control Interface</em>
+</p>
 
-<img width="521" height="398" alt="image" src="https://github.com/user-attachments/assets/ba2eac32-f30e-44c7-894d-cf215177d58c" />
-- ⭡ ESP32-Based RFID Access Control System with Live Web Log
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ba2eac32-f30e-44c7-894d-cf215177d58c" alt="ESP32 RFID Access Control System" width="550">
+  <br>
+  <em>ESP32-Based RFID Access Control System with Live Web Log</em>
+</p>
 
