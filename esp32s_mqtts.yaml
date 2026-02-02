@@ -1,0 +1,44 @@
+# If you enable MQTT and you do not use the “native API” for Home Assistant, 
+#   you must remove the api: line from your ESPHome configuration, 
+#   otherwise the ESP will reboot every 15 minutes because no client connected to the native API.
+
+broker: !secret mqtt_broker
+username: !secret mqtt_username
+password: !secret mqtt_password
+
+birth_message:
+  topic: maker/my_name/life
+  payload: I am on-line.
+
+will_message:
+  topic: maker/my_name/life
+  payload: I am off-line.
+
+
+# The message payload is available under the name x inside that lambda.
+on_message:
+
+  - topic: maker/my_name/ringtone
+    payload: 'game_over'
+    then:
+      - rtttl.play: !lambda return id(game_over);
+
+  - topic: maker/my_name/ringtone
+    payload: 'star_wars'
+    then:
+      - rtttl.play: !lambda return id(star_wars);
+
+  - topic: maker/my_name/ringtone
+    payload: 'indiana_jones'
+    then:
+      - rtttl.play: !lambda return id(indiana_jones);
+
+  #- topic: maker/my_name/ringtone
+  #  then:
+  #    - rtttl.play: !lambda |-
+  #        if (strcmp(x.c_str(), "star_wars") == 0)
+  #          return id(star_wars);
+  #        else if (strcmp(x.c_str(), "indiana_jones") == 0)
+  #          return id(indiana_jones);
+  #        else
+  #          return id(game_over);

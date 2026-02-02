@@ -1,0 +1,62 @@
+# 數字時鐘 LED 顯示器
+- platform: tm1637
+  id: my_clock
+  clk_pin: 14
+  dio_pin: 13
+  inverted: true
+  length: 4
+  update_interval: 500ms
+  lambda: |-
+    short hour, minute;
+    char digits[7];
+    static int i = 1680;
+
+    i = ++i % 10000;
+
+    if (id(sntp_time).now().is_valid()) {
+      hour = id(sntp_time).now().hour;
+      minute = id(sntp_time).now().minute;
+    }
+    else {
+      hour = i / 100;
+      minute = i % 100;
+    }
+
+    if (i % 2)
+      sprintf(digits, "%02i.%02i", hour, minute);
+    else
+      sprintf(digits, "%02i%02i", hour, minute);
+
+    it.print(digits);
+
+
+# OLED 顯示器
+- platform: ssd1306_i2c
+  model: "SSD1306 128x64"
+  #reset_pin: D0
+  address: 0x3C
+  pages:
+    - id: page_goomo
+      lambda: |-
+        it.strftime(0, 0, id(font_lucidaconsole_20), "%Y-%m-%d", id(sntp_time).now()); 
+        it.strftime(0, 21, id(font_lucidaconsole_20), "%H:%M:%S", id(sntp_time).now()); 
+        it.circle(116, 30, 11);
+        it.filled_circle(116, 30, 6);
+        it.print(0, 42, id(font_arial_20), "Goomo Studio");
+    - id: page_distance
+      lambda: |-
+        it.print(0, 0, id(font_times_20), "Distance");
+        it.printf(0, 21, id(font_lucidaconsole_20), "%3.0f cm", id(hc_sr04).state * 100);
+        it.print(0, 42, id(font_arial_20), "Goomo Studio");
+    - id: page_badge
+      lambda: |-
+        it.print(0, 0, id(font_arial_24), "Badge");
+        it.print(0, 30, id(font_times_22), "97-D8-36-B2");
+    - id: page_card
+      lambda: |-
+        it.print(0, 0, id(font_arial_24), "Card");
+        it.print(0, 30, id(font_times_22), "63-F3-06-96");
+    - id: page_lanyard
+      lambda: |-
+        it.print(0, 0, id(font_arial_24), "Lanyard");
+        it.print(0, 30, id(font_times_22), "82-0A-8A-DD");

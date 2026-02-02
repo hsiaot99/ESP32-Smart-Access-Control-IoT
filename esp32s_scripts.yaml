@@ -1,0 +1,33 @@
+# 定義 remote_transmitter 紅外線搖控器輸出命令
+- id: remote_send_codes1
+  then:
+    - remote_transmitter.transmit_raw:
+        code: [4088, -1542, 1019, -510, 513, -1019, 510, -509, 511, -510, 1020,
+              -1020, 1022, -1019, 510, -509, 511, -510, 511, -509, 511, -510,
+              1020, -1019, 510, -511, 1020, -510, 512, -508, 510, -1020, 1022,
+              -1021, 1019, -1019, 511, -510, 510, -510, 1022, -1020, 1019,
+              -1020, 511, -511, 1018, -1022, 1020, -1019, 1021, -1019, 1020,
+              -511, 510, -1019, 1023, -1019, 1019, -510, 512, -508, 510, -511,
+              512, -1019, 510, -509]
+
+
+# 定義 Servo 伺服馬達的三種控制方法
+- id: servo_given
+  parameters:
+    given_angle: int
+  then:
+    - servo.write:
+        id: servo_sg90
+        level: !lambda 'return given_angle / 100.0;'
+
+- id: servo_right
+  then:
+    - servo.write:
+        id: servo_sg90
+        level: -99.0%
+
+- id: servo_left
+  then:
+    - servo.write:
+        id: servo_sg90
+        level: 99.0%

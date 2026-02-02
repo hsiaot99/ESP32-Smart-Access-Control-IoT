@@ -1,0 +1,62 @@
+# 手觸按鍵
+- platform: gpio
+  pin: 
+    number: 36
+    inverted: True
+  name: Push Button
+  on_click:
+    min_length: 500ms
+    max_length: 1500ms
+    then:
+      - rtttl.play: !lambda 'return id(game_over);'
+  on_double_click:
+    then:
+      - rtttl.stop
+
+# 紅外線接近感應開關
+- platform: gpio
+  pin: 
+    number: 35
+    inverted: True
+  name: Infrared Switch
+
+# 各個 Tag 感應開關
+- platform: rc522
+  id: tag_97d836b2
+  uid: 97-D8-36-B2
+  name: "Tag C30274A5 badge"
+  on_press:
+    then:
+      - display.page.show: page_badge
+  on_release:
+    then:
+      - display.page.show: page_goomo
+                
+- platform: rc522
+  id: tag_63f30696
+  uid: 63-F3-06-96
+  name: "Tag 63F30696 card"
+  on_press:
+    then:
+      - display.page.show: page_card
+  on_release:
+    then:
+      - display.page.show: page_goomo
+
+- platform: rc522
+  id: tag_820a8add
+  uid: 82-0A-8A-DD
+  name: "Tag 820A8ADD lanyard"
+  on_press:
+    then:
+      - display.page.show: page_lanyard
+  on_release:
+    then:
+      - display.page.show: page_goomo
+
+# 光敏開關
+- platform: gpio
+  pin: 
+    number: 39
+    inverted: False
+  name: Photo Switch

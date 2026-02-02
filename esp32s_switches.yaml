@@ -1,0 +1,101 @@
+# ESP8266 / ESP32 內建藍色 LED
+#- platform: gpio
+#  name: Built-in Blue LED
+#  id: led_builtin
+#  pin: 
+#    number: 2
+#    inverted: False
+
+
+
+# Relay 繼電器
+- platform: gpio
+  name: Relay
+  pin:
+    number: 32       # v2 原為 0
+    inverted: False
+
+
+
+# RGB 三色共陽 LED 
+#- platform: gpio
+#  id: rgb_led_blue
+#  name: RGB LED Blue
+#  pin: 
+#    number: 2
+#    inverted: True
+#- platform: gpio
+#  name: RGB LED Red 
+#  pin: 
+#    number: ?
+#    inverted: True
+- platform: gpio
+  id: rgb_led_green
+  name: RGB LED Green
+  pin: 
+    number: 0
+    inverted: false
+
+
+# Template Switch
+#
+- platform: template
+  # 撥放 Ringtone: game_over
+  name: "Ringtone game_over"
+  id: rtttl_game_over
+  optimistic: true
+  turn_on_action:
+    - rtttl.play: !lambda 'return id(game_over);'
+    - globals.set:
+        id: playing_game_over
+        value: 'true'
+  turn_off_action:
+    - rtttl.stop
+    - globals.set:
+        id: playing_game_over
+        value: 'false'
+  lambda: 'return id(playing_game_over);'
+
+
+- platform: template
+  # 撥放 Ringtone: indiana_jones
+  name: "Ringtone indiana_jones"
+  id: rtttl_indiana_jones
+  optimistic: true
+  turn_on_action:
+    - rtttl.play: !lambda 'return id(indiana_jones);'
+    - globals.set:
+        id: playing_indiana_jones
+        value: 'true'
+  turn_off_action:
+    - rtttl.stop
+    - globals.set:
+        id: playing_indiana_jones
+        value: 'false'
+  lambda: 'return id(playing_indiana_jones);'
+
+
+- platform: template
+  # 撥放 Ringtone: star_wars
+  name: "Ringtone star_wars"
+  id: rtttl_star_wars
+  optimistic: true
+  turn_on_action:
+    - rtttl.play: !lambda 'return id(star_wars);'
+    - globals.set:
+        id: playing_star_wars
+        value: 'true'
+  turn_off_action:
+    - rtttl.stop
+    - globals.set:
+        id: playing_star_wars
+        value: 'false'
+  lambda: 'return id(playing_star_wars);'
+
+
+- platform: template
+  # 紅外線搖控器輸出命令： remote_send_codes1
+  name: "Remote Code1"
+  optimistic: true
+  turn_on_action: 
+    - script.execute: remote_send_codes1

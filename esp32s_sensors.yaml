@@ -1,0 +1,60 @@
+# 光敏感測器
+- platform: adc
+  pin: 34 # A6 
+  name: Photo Detector
+  update_interval: 3s
+
+# 溫濕度感測器 DHT11
+- platform: dht
+  model: DHT11
+  pin: 33
+  update_interval: 10s
+  temperature:
+    name: DHT11 Temperature
+    id: dht_temp
+    on_value:
+      - mqtt.publish:
+          topic: maker/my_name/temperature
+          payload: !lambda |-
+            char s[100];
+            sprintf(s, "{\"temperature\": %.1f, \"unit\": \"°C\"}", x);
+            return s;
+  humidity:
+    name: DHT11 Humidity
+    id: dht_humi
+    on_value:
+      - mqtt.publish:
+          topic: maker/my_name/humidity
+          payload: !lambda |-
+            char s[100];
+            sprintf(s, "{\"humidity\": %.0f, \"unit\": \"%%\"}", x);
+            return s;
+
+
+# 超音波測距模組
+- platform: ultrasonic
+  name: HC-SR04
+  id: hc_sr04
+  trigger_pin: 16
+  echo_pin: 17
+  update_interval: 3s  # Defaults to 60s
+  on_value:
+    then:
+      - if:
+          condition:
+            lambda: |-
+              static int i = 0;
+              int j = x * 100;
+              int ok = (i != j) && (! isnan(x));
+              if (ok) i = j;
+              return ok;
+          then:
+            - display.page.show: page_distance
+            - mqtt.publish:
+                topic: maker/my_name/distance
+                payload: !lambda |-
+                  char s[100];
+                  sprintf(s, "{\"distance\": %.0f, \"unit\": \"cm\"}", x * 100);
+                  return s;
+            - delay: 1s
+            - display.page.show: page_goomo

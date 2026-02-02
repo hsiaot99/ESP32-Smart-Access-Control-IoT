@@ -1,0 +1,25 @@
+# 全彩燈條 (WS2812 驅動 5050 RGB LED *8)
+ 
+- platform: esp32_rmt_led_strip
+  rgb_order: GRB
+  pin: 15
+  num_leds: 8
+  chipset: ws2812
+  id: led_strip
+  name: "Colorful LED Strip"
+  effects:
+    - addressable_color_wipe:
+    - addressable_rainbow:
+        name: Rainbow 16
+        width: 16
+    - pulse:
+    - strobe:
+    - flicker:
+    - addressable_scan:
+    - addressable_twinkle:
+    - addressable_fireworks:
+    - addressable_flicker:
+    - random:
+        name: Random 10
+        update_interval: 10s
+        transition_length: 2s
